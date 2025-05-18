@@ -1,0 +1,152 @@
+
+print("If You Were A Sea Creature Personality Quiz")
+
+def run_quiz(questions):
+    total_score = 0  # Store cumulative score
+
+    for question, answers in questions.items():
+        print("\n" + question)  # Display question
+        for i, answer in enumerate(answers):
+            print(f"{i + 1}. {answer[0]}")  # Display answer choices
+
+        while True:
+            try:
+                choice = int(input("Enter your choice (number): "))
+                if 1 <= choice <= len(answers):
+                    break
+                else:
+                    print("Invalid input. Please enter a number within the range.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
+
+        # Add selected score to total
+        #print(answers) <-- for debugging
+        total_score += answers[choice - 1][1]
+
+    return total_score
+
+def determine_personality(score, personality_ranges):
+    for personality, (min_score, max_score) in personality_ranges.items():
+        if min_score <= score <= max_score:
+            return personality
+    return "Undetermined"
+
+def display_result(personality, descriptions):
+    print(f"\nYour personality type is: {personality}")
+    print(descriptions.get(personality, "Description not available."))
+
+# Quiz questions with numerical values assigned to choices
+questions = {
+    "What is your favorite color?": [
+        ("Red", 3),
+        ("Blue", 2),
+        ("Green", 1),
+    ],
+    "What is your favorite subject?": [
+        ("Math", 3),
+        ("Science", 2),
+        ("English", 1),
+    ],
+    "Out of these three, which is your most preferred hobby?": [
+        ("Reading/Writing", 2),
+        ("Art", 1),
+        ("Sports", 3),
+    ],
+    "Out of these three, which is your most preferred game?": [
+        ("Roblox", 2),
+        ("Minecraft", 1),
+        ("Fortnite", 3),
+    ],
+    "Out of these three, which is your most preferred book genre?": [
+        ("Fantasy", 1),
+        ("Romance", 2),
+        ("Mystery", 3),
+    ],
+    "Out of these three, which is your most preferred music genre?": [
+        ("Pop", 3),
+        ("Rap", 2),
+        ("Rock", 1),
+    ],
+    "What is your favorite time of day?": [
+        ("Morning", 1),
+        ("Afternoon", 3),
+        ("Evening", 2),
+    ],
+    "What is your favorite weather?": [
+        ("Sunny", 3),
+        ("Rainy", 1),
+        ("Snowy", 2),
+    ],
+    "Out of these three, which is your preferred pet?": [
+        ("Dog", 3),
+        ("Cat", 1),
+        ("Parrot", 2)
+    ],
+    "Out of these three, what is your preferred beverage?": [
+        ("Tea", 1),
+        ("Coffee", 2),
+        ("Pop", 3),
+    ],
+    "If you were on a deserted island, which would you want first out of these three options?": [
+        ("Entertainment", 1),
+        ("A Flare/Radio", 2),
+        ("Weapon", 3),
+    ],
+    "Out of these three, which would be your dessert of choice?": [
+        ("Ice Cream", 1),
+        ("Cookies", 2),
+        ("Cake", 3),
+    ],
+    "What is your favorite meal of the day?": [
+        ("Breakfast", 3),
+        ("Lunch", 2),
+        ("Dinner", 1),
+    ],
+    "Which chipmunk do you associate most with?": [
+        ("Alvin", 3),
+        ("Simon", 1),
+        ("Theodore", 2),
+    ],
+}
+
+# Defines the numerical range for personality types
+personality_ranges = {
+    "Hermit Crab": (15, 16),
+    "Moon Jellyfish": (17,18),
+    "Pufferfish": (19,20),
+    "Manta Ray": (21,22),
+    "Koi Fish": (23,24),
+    "Sea Turtle": (25,26),
+    "Clownfish": (27,28),
+    "Starfish": (29,30),
+    "Dumbo Octopus": (31,32),
+    "Whale Shark": (33,34),
+    "Narwhal": (35,36),
+    "Otter": (37,38),
+    "Axolotl": (39,40),
+    "Swordfish": (41,42),
+    "Great White Shark": (43,44, 45)
+}
+
+descriptions = {
+    "Hermit Crab": "You're shy and curious to explore new things. Did you know that Hermit Crabs are actually more related to lobsters than crabs?",
+    "Moon Jellyfish": "You're easy-going! Moon Jellyfish deliver a very mild sting and are named after its translucent bell.",
+    "Pufferfish": "You enjoy your personal space, but you can be bold too! Pufferfish have beak-like structures that form as their mouths.",
+    "Manta Ray": "You prefer a relaxed and peaceful life. The Manta Ray is the largest ray in the world and has a wingspan of up to 26 feet.",
+    "Koi Fish": "You are social and aware, and can form strong bonds with others. Koi Fish display intricate behavior and hierarchy among themselves.",
+    "Sea Turtle": "You are independent yet faithful to home. Sea Turtles return to their home regions for nesting and feeding every year.",
+    "Clownfish": "You are an energetic and busy fish. A baby Clownfish is called a 'fry'!",
+    "Starfish": "You are creative and persevering. Starfish will grow an arm back even after losing it.",
+    "Dumbo Octopus": "You are intelligent and graceful. Dumbo Octopus are named after the Disney flying elephant, Dumbo, due to how it swims.",
+    "Whale Shark": "You're gentle and comfortable around people. Despite having teeth, Whale Sharks don't use them to eat.",
+    "Narwhal": "You are playful and loyal to those that are close to you. Did you know that a Narwhal's tusk is just an overgrown tooth?",
+    "Otter": "You are love having fun and being around others, whether it be chatting or playing. Otters hold hands when they sleep, so they don't drift apart.",
+    "Axolotl": "You can be calm and lazy, but you also love being active. In Aztec mythology, the axolotl is the transformed god of fire and lightning, 'Xolotl'.",
+    "Swordfish": "You are proud, energetic, and a bit eccentric. Did you know that Swordfish jump above the water to dislodge parasites.",
+    "Great White Shark": "You have a wide range of behaviors and love exploring. Great White Sharks will do something called 'spy hopping', where they lift their head above the surface of the water to see better.",
+}
+
+#Run the quiz and determine personality
+score = run_quiz(questions)
+personality = determine_personality(score, personality_ranges)
+display_result(personality, descriptions)
